@@ -16,7 +16,10 @@ export const register = async (data) => {
     password: hashedPassword
   });
 
-  return user;
+  const userObj = user.toObject();
+  delete userObj.password;
+
+  return userObj;
 };
 
 export const login = async (data) => {
