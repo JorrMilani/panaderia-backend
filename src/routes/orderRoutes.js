@@ -1,12 +1,19 @@
-import { Router } from "express";
-import * as orderController from "../controllers/orderController.js";
-import { authMiddleware } from "../middlewares/authMiddleware.js";
+import express from "express";
+const router = express.Router();
 
-const router = Router();
+import {
+  createOrder,
+  getOrders,
+  updateOrderStatus,
+} from "../controllers/orderController.js";
 
-router.post("/", authMiddleware, orderController.createOrder);
-router.get("/", authMiddleware, orderController.getOrders);
-router.put("/:id", authMiddleware, orderController.updateOrderStatus);
-router.delete("/:id", authMiddleware, orderController.deleteOrder);
+// ✅ CREAR PEDIDO
+router.post("/", createOrder);
+
+// ✅ OBTENER PEDIDOS
+router.get("/", getOrders);
+
+// ✅ MARCAR COMO ENTREGADO
+router.put("/:id/status", updateOrderStatus);
 
 export default router;
